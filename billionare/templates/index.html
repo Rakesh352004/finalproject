@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}index page{% endblock %}
+{% block content %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Richest Billionaires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 20px 0;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .billionaire {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 200px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .billionaire img {
+            max-width: 100%;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .billionaire h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+            color: #222;
+        }
+        .billionaire p {
+            font-size: 1rem;
+            color: #555;
+        }
+        .billionaire:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Top 5 Richest Billionaires in the World</h1>
+    <div class="container">
+        <div class="billionaire">
+            <img src="{{ url_for('static', filename='images/th.jpg')}}" alt="Elon Musk">
+            <a href="https://en.wikipedia.org/wiki/Elon_Musk">Elon_Musk</a>
+            <p>$230 Billion</p>
+        </div>
+        <div class="billionaire">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.2beCdrhn1YLi0_ehBuqORAHaFj&pid=Api&P=0&h=180" alt="Jeff Bezos">
+            <a href="https://en.wikipedia.org/wiki/Jeff_Bezos">Jeff_Bezos</a>
+            <p>$145 Billion</p>
+        </div>
+        <div class="billionaire">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.i5tZTEohH7H5J1ZJ19nm4gHaJe&pid=Api&P=0&h=180" alt="Bernard Arnault">
+            <a href="https://en.wikipedia.org/wiki/Bernard_Arnault">Bernard Arnault</a>
+            <p>$180 Billion</p>
+        </div>
+        <div class="billionaire">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.VqoQKk6o8lvUshVyMWxVsAHaE7&pid=Api&P=0&h=180" alt="Bill Gates">
+            <a href="https://en.wikipedia.org/wiki/Bill_Gates">Bill_Gates</a>
+            <p>$105 Billion</p>
+        </div>
+        <div class="billionaire">
+            <img src="https://tse4.mm.bing.net/th?id=OIF.wfxUmEGYpU0CBBLLxRQfyw&pid=Api&P=0&h=180" alt="Warren Buffett">
+            <a href="https://en.wikipedia.org/wiki/Warren_Buffett">Warren Buffett</a>
+            <p>$90 Billion</p>
+        </div>
+    </div>
+</body>
+</html>
+
+<h1 style="text-align: center; margin-top: 20px; color: #333;">Explore the World of Billionaires</h1>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+    {% for data in content %}
+    <div class="card-container" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden; text-align: center;">
+        <div class="card" style="padding: 15px;">
+            <h2 class="card-title" style="margin: 10px 0; color: #222;">Rank: {{ data.rank }}</h2>
+            <p class="card-text" style="margin: 5px 0; font-weight: bold; color: #555;">Name: {{ data.person.personName }}</p>
+            <p class="card-text" style="margin: 5px 0; font-weight: bold; color: #555;">Final Worth: ${{ data.finalWorth }}</p>
+            <p class="card-text" style="margin: 5px 0; font-weight: bold; color: #555;">Industries: {{ data.industries }}</p>
+
+        {% endfor %}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+

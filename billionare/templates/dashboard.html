@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block title %}dashboard page{% endblock %}
+
+{% block content %}
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .chart-box {
+            width: 45%;
+            max-width: 600px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+        }
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <p>An overview of global wealth distribution and trends</p>
+    </header>
+    <div class="container">
+        <div class="chart-container">
+            <!-- Pie Chart -->
+            <div class="chart-box">
+                <h3>Wealth Distribution by Region</h3>
+                <canvas id="regionChart"></canvas>
+                <p><small>Data represents the percentage distribution of wealth across major regions.</small></p>
+            </div>
+            <!-- Bar Chart -->
+            <div class="chart-box">
+                <h3>Top 5 Billionaires' Net Worth</h3>
+                <canvas id="topBillionairesChart"></canvas>
+                <p><small>Net worth of the world's top 5 billionaires in billions of USD.</small></p>
+            </div>
+            <!-- Line Chart -->
+            <div class="chart-box">
+                <h3>Yearly Growth of Billionaires</h3>
+                <canvas id="growthChart"></canvas>
+                <p><small>Shows the increase in the number of billionaires over the years.</small></p>
+            </div>
+            <!-- Doughnut Chart -->
+            <div class="chart-box">
+                <h3>Industry Distribution</h3>
+                <canvas id="industryChart"></canvas>
+                <p><small>Distribution of billionaires across different industries.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Region Distribution Chart
+        const regionCtx = document.getElementById('regionChart').getContext('2d');
+        new Chart(regionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['North America', 'Europe', 'Asia', 'Others'],
+                datasets: [{
+                    label: 'Wealth Distribution',
+                    data: [45, 30, 20, 5],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Top 5 Billionaires Chart
+        const topBillionairesCtx = document.getElementById('topBillionairesChart').getContext('2d');
+        new Chart(topBillionairesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Elon Musk', 'Bernard Arnault', 'Jeff Bezos', 'Bill Gates', 'Warren Buffett'],
+                datasets: [{
+                    label: 'Net Worth (in $B)',
+                    data: [250, 200, 180, 150, 120],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Net Worth (in $B)' }
+                    }
+                }
+            }
+        });
+
+        // Growth Chart
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Number of Billionaires',
+                    data: [2200, 2300, 2400, 2600, 2800],
+                    borderColor: '#36a2eb',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Number of Billionaires' }
+                    }
+                }
+            }
+        });
+
+        // Industry Distribution Chart
+        const industryCtx = document.getElementById('industryChart').getContext('2d');
+        new Chart(industryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tech', 'Finance', 'Retail', 'Energy', 'Other'],
+                datasets: [{
+                    label: 'Industry Distribution',
+                    data: [35, 25, 20, 10, 10],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}
